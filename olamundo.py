@@ -1,33 +1,24 @@
 import streamlit as st
-#usando várias formatações de texto
-st.title("Este é o título do app")
-st.header("Este é o subtítulo")
-st.subheader("Este é o terceiro subtítulo")
-st.markdown("Este é texto")
-st.caption("Esta é a a legenda")
-st.code("x=2021")
-st.latex(r''' a+a r^1+a r^2+a r^3 ''')
+import pandas as pd
 
-#criando elementos gráficos
-'''Informar como colher os dados através de variáveis'''
-x = st.checkbox('Sim')
-st.title(x)
-st.button('Clique')
-st.radio('Selecione seu gênero',['Masculino','Feminino'])
-st.selectbox('Selecione seu gênero',['Masculino','Feminino'])
-st.multiselect('Escolha um departamento',['DCS', 'DE', 'DIR'])
-st.select_slider('Selecione uma resposta', ['Ruim', 'Bom', 'Excelente'])
-st.slider('Selecione um número', 0,50)
-st.number_input('Selecione um número', 0,10)
-st.text_input('Endereço de e-mail')
-st.date_input('Data de viagem')
-st.time_input('Tempo de escola')
-st.text_area('Descrição')
-st.file_uploader('Atualize uma foto')
-st.color_picker('Escolha sua cor favorita')
+df = pd.DataFrame({
+    'nomeServidor': ['Adriana', 'Monica', 'Samara'],
+    'salario': [1200,300,5000]
+})
+#posso trocar estes dados por dados de tabelas reais!
 
-#mensagens de status
-st.success("Você conseguiu!")
-st.error("Erro!")
-st.warning("Advertência")
-st.info("Esta é uma informação")
+st.write("Criando uma tabela!")
+#tabelas interativas
+st.write(df)
+#inserindo um selectbox
+opcao = st.selectbox(
+    'Qual servidor você gostaria de selecionar?',
+     df['nomeServidor'])
+#O formato de print é diferente de outras versões
+#de Python
+st.write('Você selecionou: ', opcao)
+#como filtrar os dados pelo nome?
+
+#filtrando os dados pelo nome
+dadosFiltrados = df[df['nomeServidor'] == opcao]
+dadosFiltrados
